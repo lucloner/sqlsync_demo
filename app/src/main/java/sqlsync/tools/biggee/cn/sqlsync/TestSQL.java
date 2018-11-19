@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.Random;
 
@@ -12,10 +13,10 @@ public class TestSQL {
     private static SQLiteOpenHelper db;
     private static Random r = new Random();
 
-    public final static String testSQLite() {
+    public final static String testSQLite(final Context ct) {
         try {
             if (db == null) {
-                db = new SQLiteOpenHelper(null, "mT", null, 1) {
+                db = new SQLiteOpenHelper(ct, "mT", null, 1) {
                     @Override
                     public void onCreate(SQLiteDatabase db) {
                         db.execSQL("create table test(id integer primary key autoincrement,word varchar(255),detail varchar(255))");
@@ -33,7 +34,7 @@ public class TestSQL {
                 cv.put("detail", System.currentTimeMillis());
                 db.getWritableDatabase().insert("test", "", cv);
             }
-            Cursor c = db.getReadableDatabase().query("mT", new String[]{"id", "word", "detail"}, null, null, null, null, null);
+            Cursor c = db.getReadableDatabase().query("test", new String[]{"id", "word", "detail"}, null, null, null, null, null);
             StringBuilder sb = new StringBuilder();
             c.moveToFirst();
             while (r.nextInt() % 3 > 1) {

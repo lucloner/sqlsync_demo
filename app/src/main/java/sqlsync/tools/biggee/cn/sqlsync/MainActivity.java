@@ -1,13 +1,19 @@
 package sqlsync.tools.biggee.cn.sqlsync;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,19 +62,38 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        //getPermission();
 
         mT=(TextView)findViewById(R.id.mytext);
+        final Context c=this;
 
         (new ScheduledThreadPoolExecutor(1)).scheduleAtFixedRate(new Runnable() {
                                                                      @Override
                                                                      public void run() {
-                                                                         Message msg=new Message();
-                                                                         msg.what=(int)(System.currentTimeMillis()%Integer.MAX_VALUE);
-                                                                         msg.obj=TestSQL.testSQLite();
+                                                                         try {
+                                                                             Message msg = new Message();
+                                                                             msg.what = (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
+                                                                             msg.obj = TestSQL.testSQLite(c);
+                                                                             handler.handleMessage(msg);
+                                                                             msg = new Message();
+                                                                             msg.what = 1234;
+                                                                             msg.obj = "just hello\n";
+                                                                             handler.handleMessage(msg);
+                                                                             //增加每秒执行的代码：
+
+                                                                         }
+                                                                         catch (Exception e){
+                                                                             Message msg = new Message();
+                                                                             msg.what = 4444;
+                                                                             msg.obj = e.getMessage();
+                                                                             handler.handleMessage(msg);
+                                                                             e.printStackTrace();
+                                                                         }
                                                                      }
                                                                  }
                 , 1, 1, TimeUnit.SECONDS);
 
+        //增加你的代码在下面：
     }
 
     @Override
