@@ -25,8 +25,12 @@ import java.util.Date;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import copytwo.copy2;
+
 public class MainActivity extends AppCompatActivity {
     private TextView mT;
+
+
     private Handler handler=new Handler(){
         private void write_mT(String toWrite){
             if(mT ==null){
@@ -80,11 +84,14 @@ public class MainActivity extends AppCompatActivity {
                                                                              msg.obj = "just hello\n";
                                                                              handler.handleMessage(msg);
                                                                              //增加每秒执行的代码：
+                                                                             mT.append("55555555");
+
+
 
                                                                          }
                                                                          catch (Exception e){
                                                                              Message msg = new Message();
-                                                                             msg.what = 4444;
+                                                                             msg.what = 5555;
                                                                              msg.obj = e.getMessage();
                                                                              handler.handleMessage(msg);
                                                                              e.printStackTrace();
@@ -93,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                                                                  }
                 , 1, 1, TimeUnit.SECONDS);
 
-        //增加你的代码在下面：
+
     }
 
     @Override
@@ -107,12 +114,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
+
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_settings) {            return true;
         }
 
         return super.onOptionsItemSelected(item);
