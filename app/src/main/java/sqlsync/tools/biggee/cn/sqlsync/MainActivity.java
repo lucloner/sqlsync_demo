@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import copytwo.copy;
 import copytwo.copy2;
 
 public class MainActivity extends AppCompatActivity {
@@ -70,21 +71,27 @@ public class MainActivity extends AppCompatActivity {
 
         mT=(TextView)findViewById(R.id.mytext);
         final Context c=this;
+         int a=1213;
+         a+=2;
 
+        final int[] finalA=new int[1];
+        finalA[0]=a;
+        finalA[0]++;
         (new ScheduledThreadPoolExecutor(1)).scheduleAtFixedRate(new Runnable() {
                                                                      @Override
                                                                      public void run() {
                                                                          try {
                                                                              Message msg = new Message();
                                                                              msg.what = (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
-                                                                             msg.obj = TestSQL.testSQLite(c);
+                                                                             msg.obj="22222";
+
                                                                              handler.handleMessage(msg);
                                                                              msg = new Message();
                                                                              msg.what = 1234;
                                                                              msg.obj = "just hello\n";
                                                                              handler.handleMessage(msg);
                                                                              //增加每秒执行的代码：
-                                                                             mT.append("55555555");
+                                                                             mT.append("555");
 
 
 
@@ -100,6 +107,18 @@ public class MainActivity extends AppCompatActivity {
                                                                  }
                 , 1, 1, TimeUnit.SECONDS);
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new copy().jdbc();
+            }
+        }).start();
+
+
+
+
+
+
 
     }
 
@@ -110,17 +129,17 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
+           /* int id = item.getItemId();*/
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
 
             // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
-
             //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings) {            return true;
-        }
+//            if (id == R.id.action_settings) {            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
