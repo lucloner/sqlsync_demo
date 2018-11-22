@@ -56,20 +56,15 @@ public class copy {
             String  name2=li.get(i).getName();
 
             Log.e("gong",name2+age2);
-            String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
 
-            try (Connection con = DriverManager.getConnection(connectionUrl,null); Statement stmt = con.createStatement();) {
+              String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
+                try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement();) {
 
 
               String sql="insert into guest.Teacher values(" +li.get(i).getAge()+",'"+ li.get(i).getName()+"')";
-                Log.i("gong",sql);
 
+              stmt.executeUpdate(sql);
 
-
-
-
-
-                    int in=stmt.executeUpdate(sql);
 
 
 
@@ -79,18 +74,9 @@ public class copy {
             catch (Exception e) {
                 e.printStackTrace();
             }
-
-
-
-
-
-
         }
 
-
 li.clear();
-
-
 
 
     }

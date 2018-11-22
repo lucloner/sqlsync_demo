@@ -110,9 +110,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-             copy copy=new copy();
-             copy.jdbc();
-             copy.test();
+
 
 
 
