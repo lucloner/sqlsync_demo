@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 import copytwo.copy;
 import copytwo.copy2;
+import synchronism.two;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mT;
@@ -110,6 +111,15 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+
+
+          /*      copy2 cp=new copy2();
+                cp.jdbc();
+                cp.test();*/
+            new two().four();
+
+
+
 
 
 
