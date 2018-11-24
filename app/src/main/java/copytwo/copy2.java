@@ -3,29 +3,50 @@ package copytwo;
 
 import android.util.Log;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
+/**
+ *
+ *
+ */
 public class copy2 {
     List<Student> li;
 
 
-    public  void  jdbc() {
 
+
+    public  void  jdbc() {
         li = new ArrayList<Student>();
 
+        String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
+        Connection con = null;
+
+
+
         try {
-            String sql = "select * from guest.Student";
+            con = DriverManager.getConnection(connectionUrl);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-            String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
-            try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement();) {
 
-                ResultSet rs = stmt.executeQuery(sql);
+
+
+        try {
+            Statement stmt = con.createStatement();
+
+            String sql1 = "select * from guest.Student";
+
+            ResultSet rs = stmt.executeQuery(sql1);
 
                 while (rs.next()) {
                     int age = rs.getInt("age");
@@ -39,15 +60,18 @@ public class copy2 {
                 e.printStackTrace();
             }
 
-        } catch (Exception e) {
 
-            e.printStackTrace();
-            System.out.print("出现异常");
-
-
-        }
     }
-    public  void test(){
+    public  void test()  {
+        Connection con = null;
+        String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
+
+
+        try {
+            con = DriverManager.getConnection(connectionUrl);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
         for (Student u:li
@@ -56,21 +80,19 @@ public class copy2 {
             String  name2=u.getName();
 
 
-            Log.e("gong",name2+age2);
 
-               String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
-                try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement();) {
-
-
-                    String sql="insert into guest.Teacher values(" +u.getAge()+",'"+ u.getName()+"')";
-
+                try {
+                    String sql="insert into guest.Teacher(age, name) values(?,?)";
+                    PreparedStatement stmt = con.prepareStatement(sql);
+                    stmt.setInt( 1,age2);
+                    stmt.setString(2,name2);
 
 
-                    stmt.executeUpdate(sql);
-                    }
+
+                    int oo= stmt.executeUpdate();
 
 
-            catch (Exception e) {
+                } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -78,14 +100,6 @@ public class copy2 {
         li.clear();
 
     }
-
-
-
-
-
-
-
-
 
 
 }

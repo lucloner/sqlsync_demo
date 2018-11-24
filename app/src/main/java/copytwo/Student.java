@@ -1,6 +1,7 @@
 package copytwo;
 
 public class Student {
+
     int age;
     String name;
 
@@ -19,4 +20,6 @@ public class Student {
     public void setName(String name) {
         this.name = name;
     }
+
+
 }

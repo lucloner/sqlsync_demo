@@ -13,10 +13,10 @@ import java.util.List;
 import copytwo.Student;
 
 public class two {
-    List<Student> li;
+
 
     public void four() {
-        li = new ArrayList<Student>();
+
         try {
             String sql = "select * from guest.Student";
             String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
@@ -24,10 +24,18 @@ public class two {
 
                 ResultSet rs = stmt.executeQuery(sql);
 
+                while (rs.next()){
+                    int age = rs.getInt("age");
+                    String name = rs.getString("name");
+                    String sql2="insert into guest.Teacher values(" +age+",'"+ name +"')";
+                    int a= stmt.executeUpdate(sql2);
 
-                rs.insertRow();
-                rs.moveToInsertRow();
-                rs.updateInt(0,li.get(0).getAge());
+
+
+                }
+
+
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }

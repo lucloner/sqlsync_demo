@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -112,21 +113,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
+copy2 c=new copy2();
+  c.jdbc();
+                try {
+                    c.jdbc();
+                    c.test();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-          /*      copy2 cp=new copy2();
-                cp.jdbc();
-                cp.test();*/
-            new two().four();
+/*new two().four();*/
 
-
-
-
-
-
-
-
-
-
+/*copy c=new copy();
+c.jdbc();
+c.test();*/
 
             }
         }).start();
@@ -139,16 +139,17 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     }
 
-    @Override
+   @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-           /* int id = item.getItemId();*/
+           //* int id = item.getItemId();*//*
 
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
