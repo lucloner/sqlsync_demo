@@ -63,7 +63,7 @@ public class copy {
            String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
 
                 try {
-                    String sql="insert into guest.Teacher(age, name) values(?,?)";
+                    String sql="insert into guest.Teacher(age, name) values(#{age2},#{name2})";
                     Connection con = DriverManager.getConnection(connectionUrl); PreparedStatement stmt = con.prepareStatement(sql);
                     stmt.setInt( 1,age2);
                     stmt.setString(2,name2);

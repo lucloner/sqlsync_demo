@@ -15,15 +15,17 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- *
+ *同步类
  *
  */
 public class copy2 {
     List<Student> li;
 
 
-
-
+    /**
+     * 连接数据库把数据
+     * 放进list集合里
+     */
     public  void  jdbc() {
         li = new ArrayList<Student>();
 
@@ -44,9 +46,9 @@ public class copy2 {
         try {
             Statement stmt = con.createStatement();
 
-            String sql1 = "select * from guest.Student";
+            String sql = "select * from guest.Student";
 
-            ResultSet rs = stmt.executeQuery(sql1);
+            ResultSet rs = stmt.executeQuery(sql);
 
                 while (rs.next()) {
                     int age = rs.getInt("age");
@@ -62,6 +64,11 @@ public class copy2 {
 
 
     }
+
+    /**
+     * 把数据从list集合取出
+     * 插入别的表中
+     */
     public  void test()  {
         Connection con = null;
         String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
@@ -78,7 +85,7 @@ public class copy2 {
              ) {
             int age2= u.getAge();
             String  name2=u.getName();
-
+            Log.e("gong",name2+age2);
 
 
                 try {
@@ -93,6 +100,50 @@ public class copy2 {
 
 
                 } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+
+    }
+
+    /**
+     * 多表同步
+     * 最后清空list集合
+     */
+    public  void test1()  {
+        Connection con = null;
+        String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
+
+
+        try {
+            con = DriverManager.getConnection(connectionUrl);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        for (Student u:li
+                ) {
+            int age2= u.getAge();
+            String  name2=u.getName();
+
+
+
+            try {
+                String sql="insert into guest.Teacher1(age, name) values(?,?)";
+                PreparedStatement stmt = con.prepareStatement(sql);
+                stmt.setInt( 1,age2);
+                stmt.setString(2,name2);
+
+
+
+                int oo= stmt.executeUpdate();
+
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

@@ -114,13 +114,11 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
 
 copy2 c=new copy2();
-  c.jdbc();
-                try {
-                    c.jdbc();
-                    c.test();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
+c.jdbc();
+c.test();
+c.test1();
+
 
 /*new two().four();*/
 
