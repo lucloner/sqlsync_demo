@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.Random;
 
@@ -12,7 +13,7 @@ public final  class TestSQL {
     private static SQLiteOpenHelper db;
     private static Random r = new Random();
 
-    public static Cursor testSQLite(Context ct, String SrcDB, final String SQLconnStr) {
+    public static Cursor testSQLite(Context ct, String SrcDB, final String SQLconnStr,String ID) {
         Cursor c = null;
         try {
             if (db == null) {
@@ -33,9 +34,10 @@ public final  class TestSQL {
                 ContentValues cv = new ContentValues();
                 cv.put("word", "w" + r.nextLong() + "e");
                 cv.put("detail", System.currentTimeMillis());
-                db.getWritableDatabase().insert("test", "", cv);
+                db.getWritableDatabase().insert(ID, "", cv);
             }
-              c = db.getReadableDatabase().query("test", new String[]{"id", "word", "detail"}, null, null, null, null, null);
+              c = db.getReadableDatabase().query(ID, new String[]{"id", "word", "detail"}, null, null, null, null, null);
+
 
 
 

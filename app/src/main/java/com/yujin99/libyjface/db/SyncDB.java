@@ -22,24 +22,33 @@ public  class SyncDB extends Service {
     private String header; //数据表名格式为header.SrcDBs编号_表名
     /**
      * 本方法用于初始化
-     *
      * @param SrcDBs     需要同步的所有数据库
      * @param SQLconnStr sql连接字串
      * @param context    父引用标记
      * @param ID         唯一标识
      */
-    public Cursor  Sync(String[] SrcDBs, String SQLconnStr, Context context, String ID) {
+    public Cursor Sync(String[] SrcDBs, String SQLconnStr, Context context, String ID) {
 
 
 
-    String  sql=SQLconnStr;
     String SrcDB =SrcDBs[0];
-        
-    Cursor ing=TestSQL.testSQLite(context, SrcDB, sql);
-        Log.e("gong","ing");
+
+    Cursor aggre=TestSQL.testSQLite(context, SrcDB,SQLconnStr,ID);
+        while (aggre.moveToNext()){
+            int a=aggre.getInt(0);
+            String b=aggre.getString(1);
+            String d=aggre.getString(2);
 
 
-        return ing;
+
+
+            Log.e("gong","ing"+a+b+d);
+
+
+
+        }
+
+    return aggre;
 
     }
 

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Service;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
@@ -121,10 +122,20 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String   sql = "create table test(id integer primary key autoincrement,word varchar(255),detail varchar(255))";
+              String   sql = "create table test(id integer primary key autoincrement,word varchar(255),detail varchar(255))";
             String[] in=new String[]{"Tm"};
                 SyncDB Sync=new SyncDB();
-                Sync.Sync(in, "", c, "1");
+                String id="test";
+                try {
+
+                    Cursor  ong= Sync.Sync(in, sql, c, id);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+
 
 
 
