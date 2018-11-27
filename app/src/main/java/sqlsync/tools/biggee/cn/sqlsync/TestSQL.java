@@ -5,22 +5,23 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.Random;
 
-public class TestSQL {
+public final  class TestSQL {
     private static SQLiteOpenHelper db;
     private static Random r = new Random();
 
-    public final static String testSQLite(final Context ct) {
+    public static Cursor testSQLite(Context ct, String SrcDB, final String SQLconnStr) {
+        Cursor c = null;
         try {
             if (db == null) {
-                db = new SQLiteOpenHelper(ct, "mT", null, 1) {
+                db = new SQLiteOpenHelper(ct, SrcDB,/*数据库*/ null, 1) {
                     @Override
                     public void onCreate(SQLiteDatabase db) {
-                        db.execSQL("create table test(id integer primary key autoincrement,word varchar(255),detail varchar(255))");
+                        db.execSQL(SQLconnStr);/*数据库sql创建表*/
                     }
+
 
                     @Override
                     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -34,23 +35,16 @@ public class TestSQL {
                 cv.put("detail", System.currentTimeMillis());
                 db.getWritableDatabase().insert("test", "", cv);
             }
-            Cursor c = db.getReadableDatabase().query("test", new String[]{"id", "word", "detail"}, null, null, null, null, null);
-            StringBuilder sb = new StringBuilder();
-            c.moveToFirst();
-            while (r.nextInt() % 3 > 1) {
-                c.moveToNext();
-            }
-            sb.append(":");
-            sb.append(c.getInt(0));
-            sb.append(":");
-            sb.append(c.getString(1));
-            sb.append(":");
-            sb.append(c.getString(2));
-            sb.append(":");
-            return sb.toString();
+              c = db.getReadableDatabase().query("test", new String[]{"id", "word", "detail"}, null, null, null, null, null);
+
+
+
         } catch (Exception e) {
-            return e.getMessage();
+            e.printStackTrace();
         }
+        return c;
     }
+
+
 }
 

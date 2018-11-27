@@ -1,8 +1,10 @@
 package sqlsync.tools.biggee.cn.sqlsync;
 
 import android.Manifest;
+import android.app.Service;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,6 +20,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.yujin99.libyjface.db.SyncDB;
 
 import org.w3c.dom.Text;
 
@@ -48,9 +52,14 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            write_mT(" \n"+msg.what);
-            write_mT(msg.obj.toString());
+            try {
+                super.handleMessage(msg);
+                write_mT(" \n" + msg.what);
+                write_mT(msg.obj.toString());
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         }
     };
 
@@ -85,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                                                                          try {
                                                                              Message msg = new Message();
                                                                              msg.what = (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
-                                                                             msg.obj="22222";
+                                                                             msg.obj="hh"; /*TestSQL.testSQLite(c);*/
 
                                                                              handler.handleMessage(msg);
                                                                              msg = new Message();
@@ -112,21 +121,20 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-
-copy2 c=new copy2();
-
-c.jdbc();
-c.test();
-c.test1();
+                String   sql = "create table test(id integer primary key autoincrement,word varchar(255),detail varchar(255))";
+            String[] in=new String[]{"Tm"};
+                SyncDB Sync=new SyncDB();
+                Sync.Sync(in, "", c, "1");
 
 
-/*new two().four();*/
 
-/*copy c=new copy();
-c.jdbc();
-c.test();*/
 
-            }
+
+
+
+
+
+                }
         }).start();
 
 
