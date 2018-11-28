@@ -31,6 +31,7 @@ import java.util.Date;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import copytwo.Student;
 import copytwo.copy;
 import copytwo.copy2;
 import synchronism.two;
@@ -122,30 +123,11 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-              String   sql = "create table test(id integer primary key autoincrement,word varchar(255),detail varchar(255))";
-            String[] in=new String[]{"Tm"};
-                SyncDB Sync=new SyncDB();
-                String id="test";
-                try {
 
-                    Cursor  ong= Sync.Sync(in, sql, c, id);
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+             new   synchronize().dosynchronize(c);
 
 
-
-
-
-
-
-
-
-
-
-
-                }
+            }
         }).start();
 
 

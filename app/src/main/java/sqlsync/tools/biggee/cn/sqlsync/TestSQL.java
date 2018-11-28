@@ -13,14 +13,14 @@ public final  class TestSQL {
     private static SQLiteOpenHelper db;
     private static Random r = new Random();
 
-    public static Cursor testSQLite(Context ct, String SrcDB, final String SQLconnStr,String ID) {
+    public static Cursor testSQLite(Context ct) {
         Cursor c = null;
         try {
             if (db == null) {
-                db = new SQLiteOpenHelper(ct, SrcDB,/*数据库*/ null, 1) {
+                db = new SQLiteOpenHelper(ct, "Tm",/*数据库*/ null, 1) {
                     @Override
                     public void onCreate(SQLiteDatabase db) {
-                        db.execSQL(SQLconnStr);/*数据库sql创建表*/
+                        db.execSQL("create table test(id integer primary key autoincrement,word varchar(255),detail varchar(255))");/*数据库sql创建表*/
                     }
 
 
@@ -34,9 +34,9 @@ public final  class TestSQL {
                 ContentValues cv = new ContentValues();
                 cv.put("word", "w" + r.nextLong() + "e");
                 cv.put("detail", System.currentTimeMillis());
-                db.getWritableDatabase().insert(ID, "", cv);
+                db.getWritableDatabase().insert("test", "", cv);
             }
-              c = db.getReadableDatabase().query(ID, new String[]{"id", "word", "detail"}, null, null, null, null, null);
+              c = db.getReadableDatabase().query("test", new String[]{"id", "word", "detail"}, null, null, null, null, null);
 
 
 

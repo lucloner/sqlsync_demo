@@ -7,19 +7,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import sqlsync.tools.biggee.cn.sqlsync.TestSQL;
-
 public  class SyncDB extends Service {
-    private String[] SrcDB;
+    private SQLiteDatabase[] SrcDBs;
     private Connection DstDB;
     private Context context;
     private String header; //数据表名格式为header.SrcDBs编号_表名
+
+
+
     /**
      * 本方法用于初始化
      * @param SrcDBs     需要同步的所有数据库
@@ -27,28 +27,11 @@ public  class SyncDB extends Service {
      * @param context    父引用标记
      * @param ID         唯一标识
      */
-    public Cursor Sync(String[] SrcDBs, String SQLconnStr, Context context, String ID) {
+    public  SyncDB(SQLiteDatabase[] SrcDBs, String SQLconnStr, Context context, String ID) {
+        this.SrcDBs = SrcDBs;
+        this.context = context;
+        this.header = ID;
 
-
-
-    String SrcDB =SrcDBs[0];
-
-    Cursor aggre=TestSQL.testSQLite(context, SrcDB,SQLconnStr,ID);
-        while (aggre.moveToNext()){
-            int a=aggre.getInt(0);
-            String b=aggre.getString(1);
-            String d=aggre.getString(2);
-
-
-
-
-            Log.e("gong","ing"+a+b+d);
-
-
-
-        }
-
-    return aggre;
 
     }
 
