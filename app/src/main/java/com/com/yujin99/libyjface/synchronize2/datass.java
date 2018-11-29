@@ -1,19 +1,18 @@
-package sqlsync.tools.biggee.cn.sqlsync;
+package com.com.yujin99.libyjface.synchronize2;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.Random;
 
-public final  class TestSQL {
+public class datass {
     private static SQLiteOpenHelper db;
     private static Random r = new Random();
 
-    public static Cursor testSQLite(Context ct) {
+    public static Cursor getda(Context ct, String one) {
         Cursor c = null;
         try {
             if (db == null) {
@@ -34,11 +33,9 @@ public final  class TestSQL {
                 ContentValues cv = new ContentValues();
                 cv.put("word", "w" + r.nextLong() + "e");
                 cv.put("detail", System.currentTimeMillis());
-                db.getWritableDatabase().insert("test", "", cv);
+                db.getWritableDatabase().insert(one, "", cv);
             }
-
-            c = db.getReadableDatabase().query(" sqlite_master", new String[]{"id", "word", "detail"}, null, null, null, null, null);
-
+            c = db.getReadableDatabase().query(one, new String[]{"id", "word", "detail"}, null, null, null, null, null);
 
 
 
@@ -47,8 +44,7 @@ public final  class TestSQL {
             e.printStackTrace();
         }
         return c;
+
     }
 
-
 }
-

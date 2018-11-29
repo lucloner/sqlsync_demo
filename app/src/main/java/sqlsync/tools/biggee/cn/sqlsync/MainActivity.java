@@ -22,7 +22,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+
+import com.com.yujin99.libyjface.synchronize2.doing;
 import com.yujin99.libyjface.db.SyncDB;
+import com.yujin99libyjface.entity.test;
 
 import org.w3c.dom.Text;
 
@@ -32,7 +35,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import copytwo.Student;
-import copytwo.copy;
+
 import copytwo.copy2;
 import synchronism.two;
 
@@ -124,7 +127,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-             new   synchronize().dosynchronize(c);
+
+                Cursor  d = new doing().method(c);
+
+                while (d.moveToNext()){
+                    String a= d.getString(0);
+                    String b= d.getString(1);
+                    String e= d.getString(2);
+
+                    Log.e("gong","ing"+a+b+e);
+
+                }
+
 
 
             }
