@@ -8,11 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.Random;
 
-public class datass {
+ public  class chartdata {
     private static SQLiteOpenHelper db;
     private static Random r = new Random();
 
-    public static Cursor getda(Context ct, String one) {
+    public static Cursor getdata(Context ct, String one) {
         Cursor c = null;
         try {
             if (db == null) {

@@ -128,16 +128,9 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
 
 
-                Cursor  d = new doing().method(c);
+               new doing().method(c);
 
-                while (d.moveToNext()){
-                    String a= d.getString(0);
-                    String b= d.getString(1);
-                    String e= d.getString(2);
 
-                    Log.e("gong","ing"+a+b+e);
-
-                }
 
 
 
