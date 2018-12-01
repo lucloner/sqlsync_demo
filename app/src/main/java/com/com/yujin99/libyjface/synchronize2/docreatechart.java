@@ -54,7 +54,7 @@ public class docreatechart {
                         String ppp =ong[1];
                         String pppp="CREATE TABLE guest."+ppp+";";
                         String ppppp=pppp.replace(" primary key autoincrement","");
-                        Log.e("gong", "" + ppppp);
+                       /* Log.e("gong", "" + ppppp);*/
 
 
                         new createchart().dochart(ppppp);
