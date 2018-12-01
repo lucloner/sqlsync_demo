@@ -23,9 +23,12 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 
-import com.com.yujin99.libyjface.synchronize2.doing;
+
+
 import com.yujin99.libyjface.db.SyncDB;
-import com.yujin99libyjface.entity.test;
+import com.yujin99libyjface.entity.createchart;
+import com.yujin99libyjface.entity.doing;
+
 
 import org.w3c.dom.Text;
 
@@ -34,10 +37,7 @@ import java.util.Date;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import copytwo.Student;
 
-import copytwo.copy2;
-import synchronism.two;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mT;
@@ -128,9 +128,9 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
 
 
-               new doing().method(c);
+            new doing().method(c);
 
-
+          /* new great().dochart();*/
 
 
 
