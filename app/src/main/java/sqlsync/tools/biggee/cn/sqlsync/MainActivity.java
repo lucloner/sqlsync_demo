@@ -23,11 +23,11 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 
-
-
+import com.com.yujin99.libyjface.synchronize2.doing;
 import com.yujin99.libyjface.db.SyncDB;
 import com.yujin99libyjface.entity.createchart;
-import com.yujin99libyjface.entity.doing;
+
+
 
 
 import org.w3c.dom.Text;
