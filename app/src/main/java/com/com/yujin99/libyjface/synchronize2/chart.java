@@ -39,7 +39,7 @@ public class chart {
             }
             c = db.getReadableDatabase().query("sqlite_master", new String[]{ "name"}, null, null, null, null, null);
 
-
+//1
 
 
         } catch (Exception e) {
