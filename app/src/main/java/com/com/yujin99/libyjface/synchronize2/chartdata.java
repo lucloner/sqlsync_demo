@@ -20,12 +20,12 @@ import java.util.Random;
       * 表字段信息
       *
       */
-     public static Cursor getdata(Context ct, String one) {
+     public static Cursor getdata(Context ct, String chartname,String database) {
          Cursor c = null;
          Cursor cursor = null;
          try {
              if (db == null) {
-                 db = new SQLiteOpenHelper(ct, "Tm",/*数据库*/ null, 1) {
+                 db = new SQLiteOpenHelper(ct, database,/*数据库*/ null, 1) {
                      @Override
                      public void onCreate(SQLiteDatabase db) {
                          db.execSQL("create table test(id integer primary key autoincrement,word varchar(255),detail varchar(255))");/*数据库sql创建表*/
@@ -42,10 +42,10 @@ import java.util.Random;
                  ContentValues cv = new ContentValues();
                  cv.put("word", "w" + r.nextLong() + "e");
                  cv.put("detail", System.currentTimeMillis());
-                 db.getWritableDatabase().insert(one, "", cv);
+                 db.getWritableDatabase().insert(chartname, "", cv);
              }
 
-             String sql = "SELECT * FROM " + one + ";";
+             String sql = "SELECT * FROM " + chartname + ";";
 
 
              cursor = db.getReadableDatabase().rawQuery(sql, null);

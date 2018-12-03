@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 import com.com.yujin99.libyjface.synchronize2.doing;
 import com.yujin99.libyjface.db.SyncDB;
-import com.yujin99libyjface.entity.createchart;
+
 
 
 

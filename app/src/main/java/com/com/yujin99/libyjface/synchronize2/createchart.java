@@ -10,12 +10,12 @@ import java.sql.Statement;
 public class createchart {
 
 
-
-    public   void  dochart(String sql){
+//创建或删除表单
+    public   void  dochart(String sql,  String connectionUrl){
 
         Connection con = null;
         Statement stmt = null;
-        String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
+
 
         try {
 
@@ -25,7 +25,7 @@ public class createchart {
 
 
             stmt.executeUpdate(sql);
-            Log.e("gong", "ng" + "表已创建");
+            Log.e("gong", "ng" + "表已创建或删除");
 
             stmt.close();
             con.close();

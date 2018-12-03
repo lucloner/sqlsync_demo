@@ -56,7 +56,7 @@ public class doing {
                         Log.e("gong", "" + ppppp);
 
 
-                       new createchart().dochart(ppppp);
+
 
                     }
 

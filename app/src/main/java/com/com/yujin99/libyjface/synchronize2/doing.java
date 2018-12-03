@@ -14,24 +14,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class doing {
+    String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
+    String database="Tm";
 
-
-    List<String> chart;
 
 
     public void method(Context ct) {
         //自动创建数据表
-        new docreatechart().method(ct);
+        new docreatechart().method(ct,connectionUrl,database);
        try{
-            //获得所有表名
+            //获得所有表名和SQL语句
 
-            Cursor c = new chart().getchart(ct);
+            Cursor c = new master().getchart(ct,database);
             //遍历所有表名
            while (c.moveToNext()) {
 
-                String b = c.getString(0);
+               String chartname = c.getString(0);
                //插入每一个表信息
-               new insert().doinsert(ct,b);
+               new insert().doinsert(ct,chartname,database);
 
                }
 

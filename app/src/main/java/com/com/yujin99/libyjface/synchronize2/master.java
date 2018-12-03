@@ -19,12 +19,12 @@ public class master {
      * @return
      */
 
-    public Cursor getchart(Context ct){
+    public Cursor getchart(Context ct,String database){
 
         Cursor c = null;
         try {
             if (db == null) {
-                db = new SQLiteOpenHelper(ct, "Tm",/*数据库*/ null, 1) {
+                db = new SQLiteOpenHelper(ct, database,/*数据库*/ null, 1) {
                     @Override
                     public void onCreate(SQLiteDatabase db) {
                         db.execSQL("create table test(id integer primary key autoincrement,word varchar(255),detail varchar(255))");/*数据库sql创建表*/

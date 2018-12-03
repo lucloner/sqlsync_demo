@@ -4,11 +4,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.yujin99libyjface.entity.createchart;
+
 
 import java.util.List;
 
 public class docreatechart {
+
     List<String> chart;
 
     /**
@@ -16,10 +17,10 @@ public class docreatechart {
      * @param ct
      */
 
-    public void method(Context ct) {
+    public void method(Context ct, String connectionUrl,String database) {
 
 
-        Cursor c=new master().getchart(ct);
+        Cursor c=new master().getchart(ct,database);
         try{
             while (c.moveToNext()) {
                 int number1 = c.getColumnCount();
@@ -53,7 +54,7 @@ public class docreatechart {
                     if(i==0){
                         String  pppp="drop table "+"guest."+o+";";
                         Log.e("gong", "" + pppp);
-                       new deletechart().dogeletechart(pppp);
+                       new createchart().dochart(pppp,connectionUrl);
 
                     }
 
@@ -69,7 +70,7 @@ public class docreatechart {
                        /* Log.e("gong", "" + ppppp);*/
 
 
-                        new createchart().dochart(ppppp);
+                        new createchart().dochart(ppppp,connectionUrl);
 
                     }
 

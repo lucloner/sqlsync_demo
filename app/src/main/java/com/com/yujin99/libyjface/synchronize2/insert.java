@@ -16,11 +16,11 @@ public class insert {
      *获取表字段信息
      * 插入表中
      * @param ct
-     * @param u 表名
+     * @param chartname 表名
      */
-    public  void doinsert(Context ct,   String u){
+    public  void doinsert(Context ct,   String chartname ,String database){
 
-        Cursor d = new chartdata().getdata(ct, u);
+        Cursor d = new chartdata().getdata(ct, chartname, database);
 
 
 
