@@ -9,11 +9,17 @@ import android.util.Log;
 
 import java.util.Random;
 
+
+
  public  class chartdata {
     private static SQLiteOpenHelper db;
     private static Random r = new Random();
      private static Cursor d;
-
+     /**
+      * 根据表名获取
+      * 表字段信息
+      *
+      */
      public static Cursor getdata(Context ct, String one) {
          Cursor c = null;
          Cursor cursor = null;
@@ -32,7 +38,7 @@ import java.util.Random;
                      }
                  };
              }
-             for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 2; i++) {
                  ContentValues cv = new ContentValues();
                  cv.put("word", "w" + r.nextLong() + "e");
                  cv.put("detail", System.currentTimeMillis());

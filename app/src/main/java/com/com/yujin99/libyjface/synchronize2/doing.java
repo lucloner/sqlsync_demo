@@ -22,10 +22,7 @@ public class doing {
     public void method(Context ct) {
         //自动创建数据表
         new docreatechart().method(ct);
-List<String> ls=new ArrayList<String>();
-
-
-        try{
+       try{
             //获得所有表名
 
             Cursor c = new chart().getchart(ct);
@@ -33,30 +30,17 @@ List<String> ls=new ArrayList<String>();
            while (c.moveToNext()) {
 
                 String b = c.getString(0);
-
+               //插入每一个表信息
                new insert().doinsert(ct,b);
 
-               //插入每一个表信息
+               }
 
-            }
-
-
-
-
-
-
-
-            }catch(Exception e){
+        }catch(Exception e){
             e.printStackTrace();
 
         }
 
     }
-
-
-
-
-
 }
 
 

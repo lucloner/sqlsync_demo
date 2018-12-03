@@ -11,6 +11,10 @@ import java.util.List;
 public class docreatechart {
     List<String> chart;
 
+    /**
+     * 创建所有表
+     * @param ct
+     */
 
     public void method(Context ct) {
 
@@ -43,6 +47,14 @@ public class docreatechart {
                             break;
                         default:
                             break;
+                    }
+
+                    //删除表格
+                    if(i==0){
+                        String  pppp="drop table "+"guest."+o+";";
+                        Log.e("gong", "" + pppp);
+                       new deletechart().dogeletechart(pppp);
+
                     }
 
                     if(i==1){

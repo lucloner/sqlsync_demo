@@ -12,6 +12,12 @@ public class master {
     private static SQLiteOpenHelper db;
     private static Random r = new Random();
 
+    /**
+     * 获得sqlite_master
+     * 的 name,sql字段信息
+     * @param ct
+     * @return
+     */
 
     public Cursor getchart(Context ct){
 
@@ -31,12 +37,7 @@ public class master {
                     }
                 };
             }
-            for (int i = 0; i < 2; i++) {
-                ContentValues cv = new ContentValues();
-                cv.put("word", "w" + r.nextLong() + "e");
-                cv.put("detail", System.currentTimeMillis());
-                db.getWritableDatabase().insert("test", "", cv);
-            }
+
             c = db.getReadableDatabase().query("sqlite_master", new String[]{   "name","sql"}, null, null, null, null, null);
 
 

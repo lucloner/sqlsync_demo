@@ -13,23 +13,27 @@ public class insert {
 
 
     /**
-     *
+     *获取表字段信息
+     * 插入表中
      * @param ct
      * @param u 表名
      */
     public  void doinsert(Context ct,   String u){
 
         Cursor d = new chartdata().getdata(ct, u);
-        Log.e("gong", "" + d);
+
+
 
         Connection con = null;
         String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
+
 
 
         try {
             con = DriverManager.getConnection(connectionUrl);
 
             while (d.moveToNext()) {
+
                 int number1 = d.getColumnCount();
               String  placeholder=null;
                 placeholder="?";
@@ -71,7 +75,7 @@ public class insert {
                 }
 
                 stmt.executeUpdate();
-                Log.e("gong", "" + "kkkkkkkkk");
+                Log.e("gong", "" + "又增加了一条数据");
 
 
 

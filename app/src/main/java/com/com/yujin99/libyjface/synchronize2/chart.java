@@ -12,7 +12,11 @@ public class chart {
     private static SQLiteOpenHelper db;
     private static Random r = new Random();
 
-
+    /**
+     * 获取所有表名
+     * @param ct
+     * @return
+     */
     public Cursor getchart(Context ct){
 
         Cursor c = null;
@@ -31,12 +35,7 @@ public class chart {
                     }
                 };
             }
-            for (int i = 0; i < 2; i++) {
-                ContentValues cv = new ContentValues();
-                cv.put("word", "w" + r.nextLong() + "e");
-                cv.put("detail", System.currentTimeMillis());
-                db.getWritableDatabase().insert("test", "", cv);
-            }
+
             c = db.getReadableDatabase().query("sqlite_master", new String[]{ "name"}, null, null, null, null, null);
 
 //1
