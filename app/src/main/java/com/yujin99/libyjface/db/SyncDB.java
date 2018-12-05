@@ -11,6 +11,8 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.com.yujin99.libyjface.synchronize2.createchart;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -37,27 +39,120 @@ public  class SyncDB extends Service {
 
 
 
-    public SyncDB( String SQLconnStr, Context context) {
+    public SyncDB( SQLiteDatabase[] SrcDBs, String SQLconnStr, Context context,String ID) {
        try {
            this.DstDB=DriverManager.getConnection(SQLconnStr);
                           } catch (SQLException e) {
                               e.printStackTrace();
                               }
-
-               this.context = context;
-
+        this.SrcDBs=SrcDBs;
+       this.context = context;
+       this.header=ID;
 
 
     }
+    public void createchart(){
 
-    public SyncDB(SQLiteDatabase[] srcDBs, String SQLconnStr, SQLiteDatabase c, Context context) {
-        try {
-            this.DstDB=DriverManager.getConnection(SQLconnStr);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        for (int i=0;i<SrcDBs.length;i++){
+
+            Cursor  d=   SrcDBs[i].query("sqlite_master", new String[]{   "name","sql"}, null, null, null, null, null);
+                while(d.moveToNext()){
+                    int number1 = d.getColumnCount();
+                    for ( int j=0;j<number1;j++){
+                        Object o=null;
+                        switch (d.getType(j)) {
+                            case Cursor.FIELD_TYPE_NULL:
+                                o=null;
+                                break;
+                            case Cursor.FIELD_TYPE_INTEGER:
+                                o=d.getInt(j);
+                                // stmt.setInt( i,d.getInt(i));
+                                break;
+                            case Cursor.FIELD_TYPE_FLOAT:
+                                o=d.getFloat(j);
+                                break;
+                            case Cursor.FIELD_TYPE_STRING:
+                                o=d.getString(j);
+                                break;
+                            case Cursor.FIELD_TYPE_BLOB:
+                                o=d.getBlob(j);
+                                break;
+                            default:
+                                break;
+                        }
+
+                        if(j==0){
+
+                          /*  String  pppp="drop table "+"guest."+header+".SrcDBs"+i+"_"+o+";";
+                            dochart(pppp);
+*/
+
+                        }
+
+                        if(j==1){
+
+                            String ing=(String)o;
+                            String[] ong=ing.split("CREATE TABLE ");
+                            String ppp =ong[1];
+                            String pppp="CREATE TABLE guest."+header+"SrcDBs"+i+"_"+ppp+";";
+                            String ppppp=pppp.replace(" primary key autoincrement","");
+                            Log.e("gong", "" + ppppp);
+
+                            dochart(ppppp);
+
+                            }
+
+
+
+
+
+
+
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                }
+
+
+         /*   String[] a=getTableNames(SrcDBs[i]);
+
+            for (int j=0;j<a.length;j++){
+
+
+                String     Sql="CREATE TABLE guest.ii;
+                Log.e("gong", "ng" + Sql);
+                dochart(Sql);
+
+
+
+
+
+
+            }*/
+
+
+
         }
-        this.context = context;
+
+
+
     }
+
+
 
 
 
@@ -82,7 +177,6 @@ public  class SyncDB extends Service {
 
               stmt = DstDB.prepareStatement(SQL);
         } catch (SQLException e) {
-            e.printStackTrace();
 
 
         }
@@ -99,6 +193,7 @@ public  class SyncDB extends Service {
 
 
 
+            e.printStackTrace();
         return false;
     }*/
     /**
@@ -267,11 +362,9 @@ public  class SyncDB extends Service {
         try {
 
             stmt =  DstDB.createStatement();
-
-
-
+            Log.e("gong", "ng" + sql);
             stmt.executeUpdate(sql);
-            Log.e("gong", "ng" + "表已创建或删除");
+
 
             stmt.close();
             DstDB.close();
@@ -326,3 +419,5 @@ public  class SyncDB extends Service {
     }
 
 }
+
+

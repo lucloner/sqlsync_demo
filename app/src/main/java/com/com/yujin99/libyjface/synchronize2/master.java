@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.Random;
 
 public class master {
-    private static SQLiteOpenHelper db;
-    private static Random r = new Random();
+
+
 
     /**
      * 获得sqlite_master
@@ -20,7 +20,7 @@ public class master {
      */
 
     public Cursor getchart(Context ct,String database){
-
+         SQLiteOpenHelper db=null;
         Cursor c = null;
         try {
             if (db == null) {

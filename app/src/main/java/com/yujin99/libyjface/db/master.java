@@ -18,14 +18,14 @@ public class master {
      * @return
      */
 
-    public  SQLiteDatabase getchart(Context ct,String database){
+    public  SQLiteDatabase getDatabase(Context ct){
         SQLiteOpenHelper db=null;
 
         SQLiteDatabase n ;
 
 
             if (db == null) {
-                db = new SQLiteOpenHelper(ct, database,/*数据库*/ null, 1) {
+                db = new SQLiteOpenHelper(ct, "Tm",/*数据库*/ null, 1) {
 
 
                     @Override
@@ -41,7 +41,7 @@ public class master {
                 };
             }
 
-
+              //获得数据库n
               n = db.getReadableDatabase();
 
 

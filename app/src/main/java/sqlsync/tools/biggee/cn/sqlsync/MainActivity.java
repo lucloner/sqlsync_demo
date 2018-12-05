@@ -129,13 +129,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 String v=null;
-                String sql = "insert into guest.test values";
-                String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
 
-                SyncDB b=  new SyncDB( connectionUrl,c);
-                SQLiteDatabase c=   b.getDatabase();
-               String[]d= b.getTableNames(c);
-               for(int i=0;i<d.length;i++) v = d[i];
+                    String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
+
+
+                    SQLiteDatabase f= new master().getDatabase(c);
+
+                    SQLiteDatabase[] g=new  SQLiteDatabase[1];
+                    g[0]=f;
+
+
+                    SyncDB b=  new SyncDB( g,connectionUrl,c,"ggg");
+
+                    b.createchart();
+
 
 
 
