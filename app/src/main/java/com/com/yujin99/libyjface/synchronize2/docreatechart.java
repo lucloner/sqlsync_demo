@@ -57,7 +57,7 @@ public class docreatechart {
                        new createchart().dochart(pppp,connectionUrl);
 
                     }
-
+                  //创建表格
                     if(i==1){
                         /**
                          * sql语句字符串拼接

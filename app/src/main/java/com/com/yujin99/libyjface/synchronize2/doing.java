@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.icu.text.StringSearch;
 import android.util.Log;
-
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,12 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class doing {
-    String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
-    String database="Tm";
 
 
-
+    /**
+     * @param ct
+     */
     public void method(Context ct) {
+        String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
+        String database="Tm";
+
         //自动创建数据表
         new docreatechart().method(ct,connectionUrl,database);
        try{

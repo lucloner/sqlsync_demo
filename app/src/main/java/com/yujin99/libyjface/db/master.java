@@ -1,6 +1,5 @@
-package com.com.yujin99.libyjface.synchronize2;
+package com.yujin99.libyjface.db;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,12 +18,15 @@ public class master {
      * @return
      */
 
-    public Cursor getchart(Context ct,String database){
+    public  SQLiteDatabase getchart(Context ct,String database){
 
-        Cursor c = null;
-        try {
+        SQLiteDatabase n ;
+
+
             if (db == null) {
                 db = new SQLiteOpenHelper(ct, database,/*数据库*/ null, 1) {
+
+
                     @Override
                     public void onCreate(SQLiteDatabase db) {
                         db.execSQL("create table test(id integer primary key autoincrement,word varchar(255),detail varchar(255))");/*数据库sql创建表*/
@@ -38,16 +40,11 @@ public class master {
                 };
             }
 
-            c = db.getReadableDatabase().query("sqlite_master", new String[]{   "name","sql"}, null, null, null, null, null);
+
+              n = db.getReadableDatabase();
 
 
-            } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return c;
-
-
-
+            return n;
 
 
 

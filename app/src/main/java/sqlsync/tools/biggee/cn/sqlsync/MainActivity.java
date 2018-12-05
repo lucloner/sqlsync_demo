@@ -25,9 +25,7 @@ import android.widget.TextView;
 
 import com.com.yujin99.libyjface.synchronize2.doing;
 import com.yujin99.libyjface.db.SyncDB;
-
-
-
+import com.yujin99.libyjface.db.master;
 
 
 import org.w3c.dom.Text;
@@ -127,10 +125,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
+                SQLiteDatabase d=new master().getchart(c,"Tm");
+                SQLiteDatabase f=new master().getchart(c,"Tm");
+                SQLiteDatabase g=new master().getchart(c,"Tm");
+                SQLiteDatabase h=new master().getchart(c,"Tm");
+                SQLiteDatabase[] v=new SQLiteDatabase[]{
+                        new master().getchart(c,"Tm"),
+                        new master().getchart(c,"Tm"),
+                        new master().getchart(c,"Tm"),
+                        new master().getchart(c,"Tm")
+                };
+                v[0]=d;
+                new SyncDB(new SQLiteDatabase[]{
+                        new master().getchart(c,"Tm"),
+                        new master().getchart(c,"Tm"),
+                        new master().getchart(c,"Tm"),
+                        new master().getchart(c,"Tm")
+                },"",c,"");
 
-            new doing().method(c);
 
-          /* new great().dochart();*/
+
+
+
+
 
 
 
