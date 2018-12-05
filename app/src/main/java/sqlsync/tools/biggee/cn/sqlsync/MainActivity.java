@@ -30,6 +30,7 @@ import com.yujin99.libyjface.db.master;
 
 import org.w3c.dom.Text;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -122,26 +123,19 @@ public class MainActivity extends AppCompatActivity {
                 , 1, 1, TimeUnit.SECONDS);
 
         new Thread(new Runnable() {
+
+            Object Connection =null ;
+
             @Override
             public void run() {
+                String v=null;
+                String sql = "insert into guest.test values";
+                String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
 
-                SQLiteDatabase d=new master().getchart(c,"Tm");
-                SQLiteDatabase f=new master().getchart(c,"Tm");
-                SQLiteDatabase g=new master().getchart(c,"Tm");
-                SQLiteDatabase h=new master().getchart(c,"Tm");
-                SQLiteDatabase[] v=new SQLiteDatabase[]{
-                        new master().getchart(c,"Tm"),
-                        new master().getchart(c,"Tm"),
-                        new master().getchart(c,"Tm"),
-                        new master().getchart(c,"Tm")
-                };
-                v[0]=d;
-                new SyncDB(new SQLiteDatabase[]{
-                        new master().getchart(c,"Tm"),
-                        new master().getchart(c,"Tm"),
-                        new master().getchart(c,"Tm"),
-                        new master().getchart(c,"Tm")
-                },"",c,"");
+                SyncDB b=  new SyncDB( connectionUrl,c);
+                SQLiteDatabase c=   b.getDatabase();
+               String[]d= b.getTableNames(c);
+               for(int i=0;i<d.length;i++) v = d[i];
 
 
 

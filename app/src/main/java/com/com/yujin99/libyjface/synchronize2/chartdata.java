@@ -21,6 +21,7 @@ import java.util.Random;
       *
       */
      public static Cursor getdata(Context ct, String chartname,String database) {
+
          Cursor c = null;
          Cursor cursor = null;
          try {
