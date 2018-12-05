@@ -58,6 +58,7 @@ public  class SyncDB extends Service {
             Cursor  d=   SrcDBs[i].query("sqlite_master", new String[]{   "name","sql"}, null, null, null, null, null);
                 while(d.moveToNext()){
                     int number1 = d.getColumnCount();
+
                     for ( int j=0;j<number1;j++){
                         Object o=null;
                         switch (d.getType(j)) {
@@ -83,20 +84,20 @@ public  class SyncDB extends Service {
 
                         if(j==0){
 
-                          /*  String  pppp="drop table "+"guest."+header+".SrcDBs"+i+"_"+o+";";
+                          /* String  pppp="drop table "+"guest."+header+"SrcDBs"+i+"_"+o+";";
                             dochart(pppp);
-*/
-
+                            Log.e("gong",  pppp);*/
                         }
+
 
                         if(j==1){
 
-                            String ing=(String)o;
+                           String ing=(String)o;
                             String[] ong=ing.split("CREATE TABLE ");
                             String ppp =ong[1];
                             String pppp="CREATE TABLE guest."+header+"SrcDBs"+i+"_"+ppp+";";
                             String ppppp=pppp.replace(" primary key autoincrement","");
-                            Log.e("gong", "" + ppppp);
+
 
                             dochart(ppppp);
 
@@ -248,7 +249,7 @@ public  class SyncDB extends Service {
 
             try {
                 p.executeUpdate();
-                Log.e("gong", "" + "又增加了一条数据");
+                Log.e("gong", "" + "又删除一条数据");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -352,7 +353,7 @@ public  class SyncDB extends Service {
      * @param sql
      *
      */
-    public   void  dochart(String sql){
+    public void  dochart(String sql){
 
 
 
@@ -362,9 +363,9 @@ public  class SyncDB extends Service {
         try {
 
             stmt =  DstDB.createStatement();
-            Log.e("gong", "ng" + sql);
-            stmt.executeUpdate(sql);
 
+            stmt.executeUpdate(sql);
+            Log.e("gong",  "创建已成功");
 
             stmt.close();
             DstDB.close();

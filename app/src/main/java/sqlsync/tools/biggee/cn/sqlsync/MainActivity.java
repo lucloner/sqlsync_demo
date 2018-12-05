@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                String v=null;
+               String v=null;
 
                     String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
 
@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                     SyncDB b=  new SyncDB( g,connectionUrl,c,"ggg");
 
                     b.createchart();
+
 
 
 
