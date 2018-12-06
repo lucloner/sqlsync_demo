@@ -51,6 +51,12 @@ public  class SyncDB extends Service {
 
 
     }
+
+    /**
+     * 本方法为最终调用的方法
+     *
+     *
+     */
     public void createchart(){
         Object chartname=null;
 
@@ -87,8 +93,8 @@ public  class SyncDB extends Service {
 
                         if(j==0){
 
-                          String  pppp="drop table "+"guest."+header+"SrcDBs"+i+"_"+o+";";
-                            dochart(pppp);
+                          String  sql="drop table "+"guest."+header+"SrcDBs"+i+"_"+o+";";
+                            dochart(sql);
 
                          chartname=o;
 
@@ -97,17 +103,22 @@ public  class SyncDB extends Service {
 
                         if(j==1){
                        //创建表
-                           String ing=(String)o;
-                            String[] ong=ing.split("CREATE TABLE ");
-                            String ppp =ong[1];
-                            String pppp="CREATE TABLE guest."+header+"SrcDBs"+i+"_"+ppp+";";
-                            String ppppp=pppp.replace(" primary key autoincrement","");
-                            Log.e("gong", "创建名" +ppppp );
-                            dochart(ppppp);
-                            //查询所有表信息
-                            String sql = "SELECT * FROM " + chartname + ";";
+                           String str=(String)o;
+                            String[] strings =str.split("CREATE TABLE ");
+                            String string =strings[1];
+                            String sql="CREATE TABLE guest."+header+"SrcDBs"+i+"_"+string+";";
+                            String sql1=sql.replace(" primary key autoincrement","");
+                            Log.e("gong", "创建名" +sql1 );
+                            dochart(sql1);
 
-                            Cursor  c=    SrcDBs[i].rawQuery(sql,null);
+
+
+
+
+                            //查询所有表信息
+                            String sql2 = "SELECT * FROM " + chartname + ";";
+
+                            Cursor  c=    SrcDBs[i].rawQuery(sql2,null);
                             //插入数据
                             String SQLcmd = "insert into guest."+header+"SrcDBs"+i+"_"+ chartname+" values";
 
@@ -122,37 +133,8 @@ public  class SyncDB extends Service {
                     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
                 }
 
-
-         /*   String[] a=getTableNames(SrcDBs[i]);
-
-            for (int j=0;j<a.length;j++){
-
-
-                String     Sql="CREATE TABLE guest.ii;
-                Log.e("gong", "ng" + Sql);
-                dochart(Sql);
-
-
-
-
-
-
-            }*/
 
 
 
@@ -200,7 +182,7 @@ public  class SyncDB extends Service {
      * @param src
      * @return
      */
-  /* private synchronized boolean RowIsEquals(PreparedStatement src) {
+  /*private synchronized boolean RowIsEquals(PreparedStatement src) {
 
 
 
@@ -212,7 +194,7 @@ public  class SyncDB extends Service {
      *
      * @param c
      */
-    public synchronized void DoSync(Cursor c, String SQLcmd) {
+    private synchronized void DoSync(Cursor c, String SQLcmd) {
         int number1 = c.getColumnCount();
         PreparedStatement p = CurConv(c,SQLcmd);
         while (c.moveToNext()) {
@@ -271,12 +253,12 @@ public  class SyncDB extends Service {
     /**
      * 本方法用于获取数据库内的表数量
      *
-     * @param db
+     * @param db 数据库
      * @return
      */
 
 
-    public  String[] getTableNames(SQLiteDatabase db) {
+    private   String[] getTableNames(SQLiteDatabase db) {
 
 
 
@@ -315,33 +297,24 @@ public  class SyncDB extends Service {
     /**
      * 创建或删除表
      *
-     * @param sql
+     * @param sql 创建或删除表Sql语句
      *
      */
-    public void  dochart(String sql){
-
-
-
-
-
+    private   void  dochart(String sql){
 
         try {
 
             Statement   stmt =  DstDB.createStatement();
 
             stmt.executeUpdate(sql);
+            } catch (SQLException e) {
 
 
 
-
-        } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
-
     }
+
 
     /**
      * 获取数据库

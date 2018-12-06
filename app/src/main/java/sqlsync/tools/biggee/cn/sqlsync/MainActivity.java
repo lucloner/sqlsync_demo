@@ -128,10 +128,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-              String v=null;
+                 String v=null;
 
                     String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
-
 
                     SQLiteDatabase f= new master().getDatabase(c);
 
@@ -139,13 +138,13 @@ public class MainActivity extends AppCompatActivity {
                     g[0]=f;
 
 
-                    SyncDB b=  new SyncDB( g,connectionUrl,c,"ggg");
+                    SyncDB b=  new SyncDB( g,connectionUrl,c,"kkk");
 
                     b.createchart();
 
 
 
-                /*  new doing().method(c);*/
+                 /* new doing().method(c);*/
 
 
 
@@ -173,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
            //* int id = item.getItemId();*//*
 
         @Override
@@ -182,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
             // automatically handle clicks on the Home/Up button, so long
 
             // as you specify a parent activity in AndroidManifest.xml.
+
             //noinspection SimplifiableIfStatement
 //            if (id == R.id.action_settings) {            return true;
 //        }
