@@ -52,11 +52,14 @@ public  class SyncDB extends Service {
 
     }
     public void createchart(){
+        Object chartname=null;
 
         for (int i=0;i<SrcDBs.length;i++){
 
             Cursor  d=   SrcDBs[i].query("sqlite_master", new String[]{   "name","sql"}, null, null, null, null, null);
+
                 while(d.moveToNext()){
+
                     int number1 = d.getColumnCount();
 
                     for ( int j=0;j<number1;j++){
@@ -84,29 +87,35 @@ public  class SyncDB extends Service {
 
                         if(j==0){
 
-                          /* String  pppp="drop table "+"guest."+header+"SrcDBs"+i+"_"+o+";";
+                          String  pppp="drop table "+"guest."+header+"SrcDBs"+i+"_"+o+";";
                             dochart(pppp);
-                            Log.e("gong",  pppp);*/
+
+                         chartname=o;
+
                         }
 
 
                         if(j==1){
-
+                       //创建表
                            String ing=(String)o;
                             String[] ong=ing.split("CREATE TABLE ");
                             String ppp =ong[1];
                             String pppp="CREATE TABLE guest."+header+"SrcDBs"+i+"_"+ppp+";";
                             String ppppp=pppp.replace(" primary key autoincrement","");
-
-
+                            Log.e("gong", "创建名" +ppppp );
                             dochart(ppppp);
+                            //查询所有表信息
+                            String sql = "SELECT * FROM " + chartname + ";";
+
+                            Cursor  c=    SrcDBs[i].rawQuery(sql,null);
+                            //插入数据
+                            String SQLcmd = "insert into guest."+header+"SrcDBs"+i+"_"+ chartname+" values";
+
+                            DoSync( c,  SQLcmd);
+
+
 
                             }
-
-
-
-
-
 
 
 
@@ -173,6 +182,7 @@ public  class SyncDB extends Service {
         }
 
       String   SQL=SQLcmd+"("+placeholder+")";
+        Log.e("gong", "插入" +SQL );
 
         try {
 
@@ -249,7 +259,7 @@ public  class SyncDB extends Service {
 
             try {
                 p.executeUpdate();
-                Log.e("gong", "" + "又删除一条数据");
+                Log.e("gong", "" + "增加了一条新数据");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -300,52 +310,7 @@ public  class SyncDB extends Service {
         return null;
     }
 
-    /**
-     * 获取表的字段信息
-     * @return
-     */
-    public  Cursor getdata() {
 
-        SQLiteOpenHelper db=null;
-         Random r = new Random();
-         Cursor d;
-
-        Cursor c = null;
-        Cursor cursor = null;
-        try {
-            if (db == null) {
-                db = new SQLiteOpenHelper(context, "Tm",/*数据库*/ null, 1) {
-                    @Override
-                    public void onCreate(SQLiteDatabase db) {
-                        db.execSQL("create table test(id integer primary key autoincrement,word varchar(255),detail varchar(255))");/*数据库sql创建表*/
-                    }
-
-
-                    @Override
-                    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-                    }
-                };
-            }
-            for (int i = 0; i < 2; i++) {
-                ContentValues cv = new ContentValues();
-                cv.put("word", "w" + r.nextLong() + "e");
-                cv.put("detail", System.currentTimeMillis());
-                db.getWritableDatabase().insert("test", "", cv);
-            }
-
-            String sql = "SELECT * FROM test;";
-
-
-            cursor = db.getReadableDatabase().rawQuery(sql, null);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return cursor;
-
-    }
 
     /**
      * 创建或删除表
@@ -357,18 +322,17 @@ public  class SyncDB extends Service {
 
 
 
-        Statement stmt = null;
+
 
 
         try {
 
-            stmt =  DstDB.createStatement();
+            Statement   stmt =  DstDB.createStatement();
 
             stmt.executeUpdate(sql);
-            Log.e("gong",  "创建已成功");
 
-            stmt.close();
-            DstDB.close();
+
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -408,6 +372,7 @@ public  class SyncDB extends Service {
                 }
             };
         }
+
 
 
         n = db.getReadableDatabase();
