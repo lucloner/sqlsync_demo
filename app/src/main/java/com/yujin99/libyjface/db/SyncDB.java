@@ -116,11 +116,7 @@ public  class SyncDB extends Service {
                                   Log.e("gong", "创建名" +sql1 );
                                     dochart(sql1);
 
-
-
-
-
-                            //查询所有表信息
+                                    //查询所有表信息
                             String sql2 = "SELECT * FROM " + chartname + ";";
 
                             Cursor  c=    SrcDBs[i].rawQuery(sql2,null);
@@ -187,32 +183,21 @@ public  class SyncDB extends Service {
      * @param src
      * @return
      */
-/*  private synchronized boolean RowIsEquals(Cursor src, ResultSet rs) {
-      while (src.moveToNext()){
-        try{
+ private synchronized boolean RowIsEquals(Cursor src, ResultSet rs) {
+     boolean t=false;
+     try{ while (rs.next()){
+         if(src==rs){
 
-            while (rs.next()){
-
-
-
-            }
+                    t=true;
+                }
+     }
         }catch (Exception e){
             e.printStackTrace();
         }
 
 
-
-
-
-      }
-
-
-
-      return false;
-
-
-
-    }*/
+        return t;
+     }
     /**
      * 本程序用于最终执行同步
      *
