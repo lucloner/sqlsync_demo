@@ -138,10 +138,10 @@ public class MainActivity extends AppCompatActivity {
                     g[0]=f;
 
 
-                    SyncDB b=  new SyncDB( g,connectionUrl,c,"kkk","guest");
+                    SyncDB b=  new SyncDB( g,connectionUrl,c,"guest");
                     b.createchart();
-                    /*new doing().method(c);
-*/
+
+
 
 
 

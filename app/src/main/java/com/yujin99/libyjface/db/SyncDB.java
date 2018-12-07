@@ -38,12 +38,12 @@ public  class SyncDB extends Service {
      * @param SQLconnStr sql连接字串
      * @param context    父引用标记
      * @param ID         唯一标识
-     * @param model      Sqlserver模型名
+     *
      */
 
 
 
-    public SyncDB( SQLiteDatabase[] SrcDBs, String SQLconnStr, Context context,String ID,String model) {
+    public SyncDB( SQLiteDatabase[] SrcDBs, String SQLconnStr, Context context,String ID) {
        try {
            this.DstDB=DriverManager.getConnection(SQLconnStr);
                           } catch (SQLException e) {
@@ -52,7 +52,7 @@ public  class SyncDB extends Service {
         this.SrcDBs=SrcDBs;
         this.context = context;
         this.header=ID;
-        this.model=model;
+
 
     }
 
@@ -97,7 +97,7 @@ public  class SyncDB extends Service {
 
                         if(j==0){
                           //删除表
-                          String  sql="drop table "+ model+"."+header+"SrcDBs"+i+"_"+o+";";
+                          String  sql="drop table "+header+".SrcDBs"+i+"_"+o+";";
                             dochart(sql);
 
                          chartname=o;
@@ -110,7 +110,7 @@ public  class SyncDB extends Service {
                            String str=(String)o;
                             String[] strings =str.split("CREATE TABLE ");
                              String string =strings[1];
-                              String sql="CREATE TABLE "+model+"."+header+"SrcDBs"+i+"_"+string+";";
+                              String sql="CREATE TABLE "+header+".SrcDBs"+i+"_"+string+";";
                             Log.e("gong", "创建名222" +sql );
                                String sql1=sql.replace(" primary key autoincrement","");
                                   Log.e("gong", "创建名" +sql1 );
@@ -125,7 +125,7 @@ public  class SyncDB extends Service {
 
                             Cursor  c=    SrcDBs[i].rawQuery(sql2,null);
                             //插入数据
-                            String SQLcmd = "insert into "+model+"."+header+"SrcDBs"+i+"_"+ chartname+" values";
+                            String SQLcmd = "insert into "+header+".SrcDBs"+i+"_"+ chartname+" values";
 
                             DoSync( c,  SQLcmd);
 
@@ -383,6 +383,7 @@ public  class SyncDB extends Service {
 
 
     }
+
 
 }
 
