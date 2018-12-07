@@ -10,9 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class insert {
-
-
-    /**
+     /**
      *获取表字段信息
      * 插入表中
      * @param ct
@@ -22,8 +20,6 @@ public class insert {
 
         Cursor d = new chartdata().getdata(ct, chartname, database);
 
-
-
         Connection con = null;
         String connectionUrl = "jdbc:jtds:sqlserver://192.168.165.180;databaseName=PZG;user=TechCent_PZG;password=12345678";
 
@@ -31,7 +27,6 @@ public class insert {
 
         try {
             con = DriverManager.getConnection(connectionUrl);
-
             while (d.moveToNext()) {
 
                 int number1 = d.getColumnCount();
